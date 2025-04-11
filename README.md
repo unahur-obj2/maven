@@ -113,7 +113,7 @@ Los plugins de Maven no solo permiten reutilizar lógica sino que además ejecut
 
 Distintos proyectos maven requieren/ofrecen distintos settings al ser referenciados como plugins. Veamos un ejemplo de la configuración del plugin de Surfire:
 
-````
+```
 <project ...>
   <...>
   <dependencies>
@@ -135,6 +135,7 @@ Distintos proyectos maven requieren/ofrecen distintos settings al ser referencia
     <plugins>
   </build>
 ```
+
 Lo recomendable en cada caso es siempre revisar la documentación oficial del proyecto maven que queremos referenciar, para entender qué settings son requeridos o convenientes para nuestro proyecto.
 
 ## Dependencias transitivas
@@ -191,7 +192,6 @@ Maven define un conjunto de etapas en la construcción (build) de nuestro proyec
 - **install**: hace público el paquete en nuestro repositorio local (ver repositorios locales en las siguiente sección)
 - **deploy**: publica el artefacto en un repositorio remoto (ver repositorios locales en las siguiente sección)
 
-
 Podemos indicar a Maven que ejecute hasta cierta fase.
 Por ejemplo:
 
@@ -224,4 +224,3 @@ Y estos links:
 
 - [Maven in 5 minutes](https://maven.apache.org/guides/-getting-started/maven-in-five-minutes.html)
 - [Simple Explanation of Maven - video de la Universidad de Cincinnati](https://www.youtube.com/watch?v=KNGQ9JBQWhQ&ab_channel=BrandanJones)
-````
