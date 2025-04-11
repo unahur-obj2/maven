@@ -27,9 +27,9 @@ Entonces llega Maven al rescate que permite trabajar entre IDEs con su propio mo
 
 En el archivo pom se declaran, entre otras cosas, un identificador único de nuestro proyecto/artefacto, que resulta de la unión de tres identificadores:
 
-- groupId: representa la organización autora/dueña del artefacto. Por ejemplo, los proyectos de Obj2 suelen usar el groupId **ar.edu.unahur.obj2**.
-- artifactId: este campo define el nombre por el que se conoce al proyecto en sí mismo. Algunos ejemplos: gesion_proyecto, simulador_vehiculo, etc.
-- versión: es el último componente del rompecabezas, dado que groupId:artifactId denota un único proyecto pero no alcanza para definir en qué versión del proyecto nos estamos parando. Se agrega entonces un número de versión para completar la información que Maven necesita para generar una identificación unívoca. Conviene seguir las reglas de versionado semántico, para liberar versiones productivas. A veces se suele acompañar de un sufijo RELEASE (para versiones estables) o SNAPSHOT (para versiones intermedias que pueden estar sujetas a cambios)
+- **groupId**: representa la organización autora/dueña del artefacto. Por ejemplo, los proyectos de Obj2 suelen usar el groupId **ar.edu.unahur.obj2**.
+- **artifactId**: este campo define el nombre por el que se conoce al proyecto en sí mismo. Algunos ejemplos: gesion_proyecto, simulador_vehiculo, etc.
+- **versión**: es el último componente del rompecabezas, dado que groupId:artifactId denota un único proyecto pero no alcanza para definir en qué versión del proyecto nos estamos parando. Se agrega entonces un número de versión para completar la información que Maven necesita para generar una identificación unívoca. Conviene seguir las reglas de versionado semántico, para liberar versiones productivas. A veces se suele acompañar de un sufijo RELEASE (para versiones estables) o SNAPSHOT (para versiones intermedias que pueden estar sujetas a cambios)
   A continuación un ejemplo básico.
 
 ```
@@ -51,7 +51,7 @@ Cuando se publica un componente, se empaquetan todas las clases compiladas (.cla
 
 ### Repositorios Maven
 
-Un repositorio Maven es un lugar donde están los artefactos Maven, estructurados en cierta forma estándar para hacer las descargas de las dependencias. Cuando instalamos Maven, se crea un repositorio Maven local en una carpeta que por defecto suele ser USER_HOME/.m2. donde USER_HOME es el directorio raiz del usuario, en windows por ejemplo C:\Users\BO60018. Si queremos ubicar al componente cuyo identificador es org.eclipse.xtend:org.eclipse.xtend.core:2.21.0.M1 podremos encontrarlo localmente en
+Un repositorio Maven es un lugar donde están los artefactos Maven, estructurados en cierta forma estándar para hacer las descargas de las dependencias. Cuando instalamos Maven, se crea un repositorio Maven local en una carpeta que por defecto suele ser USER_HOME/.m2. donde USER_HOME es el directorio raiz del usuario, en windows por ejemplo C:\Users\BO60018. Si queremos ubicar al componente cuyo identificador es ar.edu.unahur.obj2.tdd.caja_fuerte:1.0-SNAPSHOT podremos encontrarlo localmente en
 
 ```
 %M2_HOME%/repository
@@ -70,10 +70,8 @@ Un repositorio Maven es un lugar donde están los artefactos Maven, estructurado
 - en M2_HOME puede haber opcionalmente un archivo settings.xml que veremos más adelante
 - en la subcarpeta repository están todos los componentes que descargamos localmente
 
-Vemos un git de ejemplo hay que explorar los directorios incluyendo los que son ocultos, y navegar a partir de la carpeta de usuario.m2:
-![repository](./assets/repository.gif)
-
-repo maven local
+Vemos unde ejemplo hay que explorar los directorios incluyendo los que son ocultos, y navegar a partir de la carpeta de usuario.m2:
+![repo maven local](./assets/repository.gif)
 
 ### Relacionando proyectos maven desde el POM
 
@@ -115,28 +113,28 @@ Los plugins de Maven no solo permiten reutilizar lógica sino que además ejecut
 
 Distintos proyectos maven requieren/ofrecen distintos settings al ser referenciados como plugins. Veamos un ejemplo de la configuración del plugin de Surfire:
 
+````
 <project ...>
-<...>
-<dependencies>
-<...>
-</dependencies>
-<build>
-<plugins>
-
-<!-- Plugin de Maven Surefire para ejecutar pruebas -->
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-surefire-plugin</artifactId>
-<version>3.1.2</version>
-<configuration>
-<!-- Asegura la compatibilidad con JUnit 5 -->
-<forkCount>1</forkCount>
-<reuseForks>true</reuseForks>
-</configuration>
-</plugin>
-<plugins>
-</build>
-
+  <...>
+  <dependencies>
+    <...>
+  </dependencies>
+  <build>
+    <plugins>
+      <!-- Plugin de Maven Surefire para ejecutar pruebas -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <!-- Asegura la compatibilidad con JUnit 5 -->
+          <forkCount>1</forkCount>
+          <reuseForks>true</reuseForks>
+        </configuration>
+      </plugin>
+    <plugins>
+  </build>
+```
 Lo recomendable en cada caso es siempre revisar la documentación oficial del proyecto maven que queremos referenciar, para entender qué settings son requeridos o convenientes para nuestro proyecto.
 
 ## Dependencias transitivas
@@ -186,13 +184,16 @@ Maven está pensado para todo el ciclo de vida del proyecto. Lo vamos a usar par
 
 Maven define un conjunto de etapas en la construcción (build) de nuestro proyecto. Resumimos algunas acá:
 
-- generate-sources: generar código, previo a compilación.
-- compile: compila el código fuente.
-- test: ejecuta los test cases
-- package: genera un paquete con el código (.jar por ejemplo)
-- install: hace público el paquete en nuestro repositorio local (ver repositorios locales en las siguiente sección)
-- deploy: publica el artefacto en un repositorio remoto (ver repositorios locales en las siguiente sección)
-  Podemos indicar a Maven que ejecute hasta cierta fase. Por ejemplo:
+- **generate-sources**: generar código, previo a compilación.
+- **compile**: compila el código fuente.
+- **test**: ejecuta los test cases
+- **package**: genera un paquete con el código (.jar por ejemplo)
+- **install**: hace público el paquete en nuestro repositorio local (ver repositorios locales en las siguiente sección)
+- **deploy**: publica el artefacto en un repositorio remoto (ver repositorios locales en las siguiente sección)
+
+
+Podemos indicar a Maven que ejecute hasta cierta fase.
+Por ejemplo:
 
 ```
 mvn compile
@@ -223,3 +224,4 @@ Y estos links:
 
 - [Maven in 5 minutes](https://maven.apache.org/guides/-getting-started/maven-in-five-minutes.html)
 - [Simple Explanation of Maven - video de la Universidad de Cincinnati](https://www.youtube.com/watch?v=KNGQ9JBQWhQ&ab_channel=BrandanJones)
+````
