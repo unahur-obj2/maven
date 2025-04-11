@@ -132,7 +132,7 @@ Distintos proyectos maven requieren/ofrecen distintos settings al ser referencia
           <reuseForks>true</reuseForks>
         </configuration>
       </plugin>
-    <plugins>
+    </plugins>
   </build>
 ```
 
